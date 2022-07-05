@@ -196,6 +196,51 @@ final class ContainerTest extends TestCase
     }
 
     /**
+     * @testdox Test Container::instanciate() method
+     * @covers Container::instanciate
+     * @return void
+     */
+
+    public function testInstanciate(): void
+    {
+        $container = $this->getContainer();
+        $this->setProperty("services", [
+            "test" => [
+                "factory" => function ($c): object {
+                    return new \stdClass();
+                },
+                "singleton" => true
+            ]
+        ], $container);
+
+        $stdClass = DependencyInjection\Container::instanciate(function ($c): object {
+            if ($c->get("test") instanceof \stdClass) {
+                echo "success";
+            }
+
+            return new \stdClass();
+        });
+
+        $this->expectOutputString("success");
+        $this->assertInstanceOf(\stdClass::class, $stdClass);
+    }
+
+    /**
+     * @testdox Test Container::instanciate() method with invalid factory return type
+     * @covers Container::instanciate
+     * @return void
+     */
+
+    public function testInstanciateWithInvalidReturnType(): void
+    {
+        $this->expectException(DependencyInjection\Exception\InvalidFactoryReturnTypeException::class);
+        $container = $this->getContainer();
+
+        DependencyInjection\Container::instanciate(function ($c): void {
+        });
+    }
+
+    /**
      * @testdox Test Container::setVariable() method
      * @covers Container::setVariable
      * @return void
