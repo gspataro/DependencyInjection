@@ -39,6 +39,23 @@ final class Container
     private array $variables = [];
 
     /**
+     * Store a static instance of the container
+     *
+     * @var Container
+     */
+
+    private static Container $container;
+
+    /**
+     * Initialize Container object
+     */
+
+    public function __construct()
+    {
+        self::$container = $this;
+    }
+
+    /**
      * Verify if a service exists
      *
      * @param string $tag
@@ -109,6 +126,27 @@ final class Container
         }
 
         return $object;
+    }
+
+    /**
+     * Directly instanciate a class having access to the container
+     *
+     * @param callable $factory
+     * @param array $params
+     * @return object
+     */
+
+    public static function instanciate(callable $factory, array $params = []): object
+    {
+        $factoryReflection = new ReflectionFunction($factory);
+
+        if ($factoryReflection->getReturnType() != "object") {
+            throw new Exception\InvalidFactoryReturnTypeException(
+                "Invalid factory provided. A factory must return an object."
+            );
+        }
+
+        return $factory(self::$container, $params);
     }
 
     /**
