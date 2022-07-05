@@ -31,6 +31,14 @@ final class Container
     private array $services = [];
 
     /**
+     * Store variables
+     *
+     * @var array
+     */
+
+    private array $variables = [];
+
+    /**
      * Verify if a service exists
      *
      * @param string $tag
@@ -101,6 +109,31 @@ final class Container
         }
 
         return $object;
+    }
+
+    /**
+     * Set a variable
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+
+    public function setVariable(string $key, mixed $value): void
+    {
+        $this->variables[$key] = $value;
+    }
+
+    /**
+     * Get a variable
+     *
+     * @param string $key
+     * @return mixed
+     */
+
+    public function getVariable(string $key): mixed
+    {
+        return $this->variables[$key] ?? null;
     }
 
     /**
