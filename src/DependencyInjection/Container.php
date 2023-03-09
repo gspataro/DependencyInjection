@@ -150,31 +150,6 @@ final class Container
     }
 
     /**
-     * Set a variable
-     *
-     * @param string $key
-     * @param mixed $value
-     * @return void
-     */
-
-    public function setVariable(string $key, mixed $value): void
-    {
-        $this->variables[$key] = $value;
-    }
-
-    /**
-     * Get a variable
-     *
-     * @param string $key
-     * @return mixed
-     */
-
-    public function getVariable(string $key): mixed
-    {
-        return $this->variables[$key] ?? null;
-    }
-
-    /**
      * Set/get a variable
      * To set a variable provide a $value parameter
      *
