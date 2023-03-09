@@ -1,14 +1,16 @@
 {
     "name": "gspataro/dependencyinjection",
     "license": "MIT",
-    "description": "A dependency injection container component",
-    "version": "0.3.0",
+    "description": "A dependency injection container component to handle the booting process of your application",
     "authors": [
         {
             "name": "Giuseppe Spataro",
             "homepage": "https://gspataro.github.io"
         }
     ],
+    "require": {
+        "php": ">=8.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "^9.5.21"
     },
