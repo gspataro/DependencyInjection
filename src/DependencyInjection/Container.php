@@ -175,6 +175,24 @@ final class Container
     }
 
     /**
+     * Set/get a variable
+     * To set a variable provide a $value parameter
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return mixed
+     */
+
+    public function variable(string $key, mixed $value = null): mixed
+    {
+        if (is_null($value)) {
+            return $this->variables[$key] ?? null;
+        }
+
+        return $this->variables[$key] = $value;
+    }
+
+    /**
      * Load components
      *
      * @param array $components

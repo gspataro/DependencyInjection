@@ -241,19 +241,19 @@ final class ContainerTest extends TestCase
     }
 
     /**
-     * @testdox Test Container::setVariable() method
-     * @covers Container::setVariable
+     * @testdox Test Container::variable() method to set a variable
+     * @covers Container::variable
      * @return void
      */
 
-    public function testSetVariable(): void
+    public function testVariableSet(): void
     {
         $container = $this->getContainer();
 
         $variables = $this->readProperty("variables", $container);
         $this->assertFalse(isset($variables['test']));
 
-        $container->setVariable("foo", "bar");
+        $container->variable("foo", "bar");
 
         $variables = $this->readProperty("variables", $container);
         $this->assertTrue(isset($variables['foo']));
@@ -261,20 +261,20 @@ final class ContainerTest extends TestCase
     }
 
     /**
-     * @testdox Test Container::getVariable() method
-     * @covers Container::getVariable
+     * @testdox Test Container::variable() method to get a variable
+     * @covers Container::variable
      * @return void
      */
 
-    public function testGetVariable(): void
+    public function testVariableGet(): void
     {
         $container = $this->getContainer();
         $this->setProperty("variables", [
             "foo" => "bar"
         ], $container);
 
-        $this->assertEquals("bar", $container->getVariable("foo"));
-        $this->assertNull($container->getVariable("nonexisting"));
+        $this->assertEquals("bar", $container->variable("foo"));
+        $this->assertNull($container->variable("nonexisting"));
     }
 
     /**
